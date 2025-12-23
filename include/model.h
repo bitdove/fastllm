@@ -7,10 +7,10 @@
 
 #include "basellm.h"
 #include "bert.h"
-#include "xlmroberta.h"
+// #include "xlmroberta.h"
 
 namespace fastllm {
-    std::unique_ptr<BertModel> CreateEmbeddingModelFromFile(const std::string &fileName);
+    // std::unique_ptr<BertModel> CreateEmbeddingModelFromFile(const std::string &fileName);
 
     std::unique_ptr<basellm> CreateLLMModelFromGGUF(const std::string &modelPath);
 

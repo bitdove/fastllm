@@ -9,29 +9,29 @@
 #include <iomanip>
 
 #include "chatglm.h"
-#include "moss.h"
+// #include "moss.h"
 #include "llama.h"
 #include "moe.h"
-#include "qwen3.h"
-#include "qwen3_moe.h"
-#include "qwen3_next.h"
-#include "hunyuan.h"
+// #include "qwen3.h"
+// #include "qwen3_moe.h"
+// #include "qwen3_next.h"
+// #include "hunyuan.h"
 #include "deepseekv2.h"
-#include "qwen.h"
-#include "glm.h"
-#include "minicpm.h"
-#include "minicpm3.h"
-#include "internlm2.h"
+// #include "qwen.h"
+// #include "glm.h"
+// #include "minicpm.h"
+// #include "minicpm3.h"
+// #include "internlm2.h"
 #include "bert.h"
-#include "xlmroberta.h"
+// #include "xlmroberta.h"
 #include "graphllm.h"
-#include "phi3.h"
-#include "cogvlm.h"
-#include "minimax.h"
-#include "ernie4_5.h"
-#include "pangu_moe.h"
-#include "glm4_moe.h"
-#include "gpt_oss.h"
+// #include "phi3.h"
+// #include "cogvlm.h"
+// #include "minimax.h"
+// #include "ernie4_5.h"
+// #include "pangu_moe.h"
+// #include "glm4_moe.h"
+// #include "gpt_oss.h"
 
 #include "gguf.h"
 
@@ -206,69 +206,69 @@ namespace fastllm {
         basellm *model = nullptr;
         if (modelType == "chatglm") {
             model = (basellm*)(new ChatGLMModel());
-        } else if (modelType == "moss") {
-            model = (basellm*)(new MOSSModel());
-            model->weight.tokenizer.type = Tokenizer::TokenizerType::BPE;
-            model->eos_token_id = 106068;
-        } else if (modelType == "baichuan") {
-            model = (basellm*)(new LlamaModel());
-            model->model_type = "baichuan";
-            model->pre_prompt = "";
-            model->user_role = "<human>:";
-            model->bot_role = "\n<bot>:";
-            model->history_sep = "\n";
-            model->weight.tokenizer.type = Tokenizer::TokenizerType::BPE;
-        } else if (modelType == "internlm" || modelType == "internlm3") {
-            model = new LlamaModel();
-            model->model_type = "internlm";
-        } else if (modelType == "internlm2") {
-            model = new Internlm2Model();
-            model->model_type = "internlm";
+        // } else if (modelType == "moss") {
+        //     model = (basellm*)(new MOSSModel());
+        //     model->weight.tokenizer.type = Tokenizer::TokenizerType::BPE;
+        //     model->eos_token_id = 106068;
+        // } else if (modelType == "baichuan") {
+        //     model = (basellm*)(new LlamaModel());
+        //     model->model_type = "baichuan";
+        //     model->pre_prompt = "";
+        //     model->user_role = "<human>:";
+        //     model->bot_role = "\n<bot>:";
+        //     model->history_sep = "\n";
+        //     model->weight.tokenizer.type = Tokenizer::TokenizerType::BPE;
+        // } else if (modelType == "internlm" || modelType == "internlm3") {
+        //     model = new LlamaModel();
+        //     model->model_type = "internlm";
+        // } else if (modelType == "internlm2") {
+        //     model = new Internlm2Model();
+        //     model->model_type = "internlm";
         } else if (modelType == "llama") {
             model = (basellm*)(new LlamaModel());
         } else if (modelType == "moe" || modelType == "qwen2_moe") {
             model = (basellm*)(new MoeModel());
-        } else if (modelType == "qwen3_moe") {
-            model = (basellm*)(new Qwen3MOEModel());
-        } else if (modelType == "qwen3_next") {
-            model = (basellm*)(new Qwen3NextModel());
+        // } else if (modelType == "qwen3_moe") {
+        //     model = (basellm*)(new Qwen3MOEModel());
+        // } else if (modelType == "qwen3_next") {
+        //     model = (basellm*)(new Qwen3NextModel());
         } else if (modelType == "deepseek_v2" || modelType == "deepseek_v3" || modelType == "kimi_k2" || modelType == "deepseek_v32") {
             model = (basellm*)(new DeepSeekV2Model());
             model->model_type = modelType;
-        } else if (modelType == "qwen2") {
-            model = new LlamaModel();
-            model->model_type = "qwen";
-        } else if (modelType == "qwen3") {
-            model = new Qwen3Model();
-            model->model_type = "qwen3";
-        } else if (modelType == "phi3") {
-            model = new Phi3Model();
-            model->model_type = "phi3";
-        } else if (modelType=="minicpm") {
-            model = new MiniCpmModel();
-        } else if (modelType == "qwen") {
-            model = (basellm *) (new QWenModel());
-            model->weight.tokenizer.type = Tokenizer::TokenizerType::QWEN;
-        } else if (modelType == "glm") {
-            model = (basellm*)(new GLMModel());
+        // } else if (modelType == "qwen2") {
+        //     model = new LlamaModel();
+        //     model->model_type = "qwen";
+        // } else if (modelType == "qwen3") {
+        //     model = new Qwen3Model();
+        //     model->model_type = "qwen3";
+        // } else if (modelType == "phi3") {
+        //     model = new Phi3Model();
+        //     model->model_type = "phi3";
+        // } else if (modelType=="minicpm") {
+        //     model = new MiniCpmModel();
+        // } else if (modelType == "qwen") {
+        //     model = (basellm *) (new QWenModel());
+        //     model->weight.tokenizer.type = Tokenizer::TokenizerType::QWEN;
+        // } else if (modelType == "glm") {
+        //     model = (basellm*)(new GLMModel());
         } else if (modelType == "bert") {
             model = (basellm*)(new BertModel());
-        } else if (modelType == "xlm-roberta") {
-            model = (basellm*)(new XlmRobertaModel());
-        } else if (modelType == "cogvlm" || modelType == "CogVLMForCausalLM") {
-            model = (basellm*)(new CogvlmModel());
-        } else if (modelType == "minimax_m1" || modelType == "minimax_text_01") {
-            model = (basellm*)(new MinimaxModel());
-        } else if (modelType == "hunyuan" || modelType == "hunyuan_v1_dense" || modelType == "hunyuan_v1_moe") {
-            model = (basellm*)(new HunyuanModel());
-        } else if (modelType == "ernie4_5_moe" || modelType == "ernie4_5") {
-            model = (basellm*)(new Ernie4_5Model());
-        } else if (modelType == "PanguProMoE") {
-            model = (basellm*)(new PanguMOEModel());
-        } else if (modelType == "glm4_moe") {
-            model = (basellm*)(new Glm4MOEModel());
-        } else if (modelType == "gpt_oss") {
-            model = (basellm*)(new GptOssModel());
+        // } else if (modelType == "xlm-roberta") {
+        //     model = (basellm*)(new XlmRobertaModel());
+        // } else if (modelType == "cogvlm" || modelType == "CogVLMForCausalLM") {
+        //     model = (basellm*)(new CogvlmModel());
+        // } else if (modelType == "minimax_m1" || modelType == "minimax_text_01") {
+        //     model = (basellm*)(new MinimaxModel());
+        // } else if (modelType == "hunyuan" || modelType == "hunyuan_v1_dense" || modelType == "hunyuan_v1_moe") {
+        //     model = (basellm*)(new HunyuanModel());
+        // } else if (modelType == "ernie4_5_moe" || modelType == "ernie4_5") {
+        //     model = (basellm*)(new Ernie4_5Model());
+        // } else if (modelType == "PanguProMoE") {
+        //     model = (basellm*)(new PanguMOEModel());
+        // } else if (modelType == "glm4_moe") {
+        //     model = (basellm*)(new Glm4MOEModel());
+        // } else if (modelType == "gpt_oss") {
+        //     model = (basellm*)(new GptOssModel());
         } else if (modelType == "fastllmJson") {
             model = new GraphLLMModel("fastllmJson");
         } else {
