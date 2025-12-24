@@ -198,20 +198,20 @@ if (UNIT_TEST)
     target_link_libraries(testTokenizer fastllm)
 endif()
 
-add_executable(webui example/webui/webui.cpp)
-target_link_libraries(webui fastllm)
-add_custom_command(
-        TARGET webui
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E make_directory web
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/example/webui/web ${CMAKE_BINARY_DIR}/web
-)
+# add_executable(webui example/webui/webui.cpp)
+# target_link_libraries(webui fastllm)
+# add_custom_command(
+#         TARGET webui
+#         POST_BUILD
+#         COMMAND ${CMAKE_COMMAND} -E make_directory web
+#         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/example/webui/web ${CMAKE_BINARY_DIR}/web
+# )
 
-add_executable(benchmark example/benchmark/benchmark.cpp)
-target_link_libraries(benchmark fastllm)
+# add_executable(benchmark example/benchmark/benchmark.cpp)
+# target_link_libraries(benchmark fastllm)
 
-add_executable(apiserver example/apiserver/apiserver.cpp)
-target_link_libraries(apiserver fastllm)
+# add_executable(apiserver example/apiserver/apiserver.cpp)
+# target_link_libraries(apiserver fastllm)
 
 if (BUILD_CLI)
     add_executable(FastllmStudio_cli example/FastllmStudio/cli/cli.cpp example/FastllmStudio/cli/ui.cpp)
