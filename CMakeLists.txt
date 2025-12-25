@@ -81,29 +81,11 @@ set(FASTLLM_CXX_SOURCES src/fastllm.cpp src/device.cpp src/model.cpp src/executo
         src/devices/cpu/cpudevice.cpp src/devices/cpu/cpudevicebatch.cpp
         src/models/graphllm.cpp 
         src/models/chatglm.cpp 
-        # src/models/moss.cpp 
         src/models/llama.cpp 
-        # src/models/qwen.cpp 
         src/models/basellm.cpp
-        # src/models/glm.cpp 
-        # src/models/minicpm.cpp 
-        # src/models/minicpm3.cpp 
-        # src/models/internlm2.cpp 
         src/models/bert.cpp 
         src/models/moe.cpp 
         src/models/deepseekv2.cpp
-        # src/models/phi3.cpp 
-        # src/models/xlmroberta.cpp 
-        # src/models/cogvlm.cpp 
-        # src/models/qwen3.cpp 
-        # src/models/qwen3_moe.cpp 
-        # src/models/qwen3_next.cpp
-        # src/models/minimax.cpp 
-        # src/models/hunyuan.cpp
-        # src/models/ernie4_5.cpp 
-        # src/models/pangu_moe.cpp 
-        # src/models/glm4_moe.cpp 
-        # src/models/gpt_oss.cpp
         third_party/json11/json11.cpp
         third_party/gguf/gguf.cpp third_party/gguf/ggml-quant.cpp third_party/gguf/ggml-iqk.cpp third_party/gguf/ggml-dequantize.cpp
         third_party/gguf/gguf-adapter.cpp
@@ -134,7 +116,6 @@ if (USE_CUDA)
         add_compile_definitions(CUDA_NO_TENSOR_CORE)
     endif()
     include_directories(include/devices/cuda)
-    #message(${CMAKE_CUDA_IMPLICIT_LINK_DIRECTORIES})
     set(FASTLLM_CUDA_SOURCES src/devices/cuda/cudadevice.cpp src/devices/cuda/cudadevicebatch.cpp 
         src/devices/cuda/fastllm-cuda.cu src/devices/cuda/fastllm-ggml-cuda.cu)
 
@@ -189,34 +170,6 @@ target_link_libraries(main fastllm)
 
 add_executable(quant tools/src/quant.cpp)
 target_link_libraries(quant fastllm)
-
-# if (UNIT_TEST)
-#     add_executable(testOps test/ops/cppOps.cpp)
-#     target_link_libraries(testOps fastllm)
-
-#     add_executable(testTokenizer test/ops/tokenizerTest.cpp)
-#     target_link_libraries(testTokenizer fastllm)
-# endif()
-
-# add_executable(webui example/webui/webui.cpp)
-# target_link_libraries(webui fastllm)
-# add_custom_command(
-#         TARGET webui
-#         POST_BUILD
-#         COMMAND ${CMAKE_COMMAND} -E make_directory web
-#         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/example/webui/web ${CMAKE_BINARY_DIR}/web
-# )
-
-# add_executable(benchmark example/benchmark/benchmark.cpp)
-# target_link_libraries(benchmark fastllm)
-
-# add_executable(apiserver example/apiserver/apiserver.cpp)
-# target_link_libraries(apiserver fastllm)
-
-# if (BUILD_CLI)
-#     add_executable(FastllmStudio_cli example/FastllmStudio/cli/cli.cpp example/FastllmStudio/cli/ui.cpp)
-#     target_link_libraries(FastllmStudio_cli fastllm)
-# endif()
 
 add_library(fastllm_tools SHARED ${FASTLLM_CXX_SOURCES} ${FASTLLM_CUDA_SOURCES} ${FASTLLM_TFACC_SOURCES} ${FASTLLM_TOPS_SOURCES} tools/src/pytools.cpp)
 target_link_libraries(fastllm_tools PUBLIC ${FASTLLM_LINKED_LIBS})
