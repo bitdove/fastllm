@@ -1,9 +1,9 @@
 #pragma once
 #include "chatglm.h"
-#include "moss.h"
+// #include "moss.h"
 #include "basellm.h"
 #include "llama.h"
-#include "qwen.h"
+// #include "qwen.h"
 #include "fastllm.h"
 
 enum LLM_TYPE {
