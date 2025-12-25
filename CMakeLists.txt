@@ -66,6 +66,7 @@ set(FASTLLM_CXX_SOURCES src/fastllm.cpp src/device.cpp src/model.cpp src/executo
         src/models/bert.cpp 
         src/models/moe.cpp 
         src/models/deepseekv2.cpp
+        src/models/qwen3_next.cpp
         third_party/json11/json11.cpp
         third_party/gguf/gguf.cpp third_party/gguf/ggml-quant.cpp third_party/gguf/ggml-iqk.cpp third_party/gguf/ggml-dequantize.cpp
         third_party/gguf/gguf-adapter.cpp
