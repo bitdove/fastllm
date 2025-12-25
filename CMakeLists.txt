@@ -5,15 +5,6 @@ project(fastllm LANGUAGES CXX)
 option(USE_CUDA "use CUDA" OFF)
 option(CUDA_NO_TENSOR_CORE "Optimize for legacy CUDA GPUs which has Tensor Core." OFF)
 
-option(PY_API "python api" OFF)
-
-option(USE_MMAP "use mmap" OFF)
-
-option(USE_SENTENCEPIECE "use sentencepiece" OFF)
-
-option(BUILD_CLI "build cli" OFF)
-
-option(UNIT_TEST "build unit tests" OFF)
 
 if(NOT DEFINED CUDA_ARCH)
     set(CUDA_ARCH "native")
@@ -25,24 +16,13 @@ message(STATUS "CUDA_ARCH: ${CUDA_ARCH}")
 
 message(STATUS "For legacy CUDA GPUs: ${CUDA_NO_TENSOR_CORE}")
 
-message(STATUS "PYTHON_API: ${PY_API}")
-
-message(STATUS "BUILD_CLI: ${BUILD_CLI}")
-
-message(STATUS "USE_SENTENCEPIECE: ${USE_SENTENCEPIECE}")
-
 message(STATUS "MAKE_WHL_X86: ${MAKE_WHL_X86}")
 
 set(CMAKE_BUILD_TYPE "Release")
 
 string(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+$" "\\1" CXX_MAJOR_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
 
-
-if (MAKE_WHL_X86)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread --std=c++17 -O2 -mavx -mavx2 -mf16c -mfma -static-libstdc++ -static-libgcc -fPIC -Wl,-Bsymbolic -Wl,--exclude-libs,ALL")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread --std=c++17 -O2 -march=native")
-endif()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread --std=c++17 -O2 -march=native")
 message(STATUS "CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
 if (CXX_MAJOR_VERSION GREATER_EQUAL 10 AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
     set_source_files_properties(
@@ -99,16 +79,6 @@ include_directories(include/devices/cpu)
 include_directories(third_party/json11)
 include_directories(third_party/gguf)
 
-if (USE_MMAP)
-    add_compile_definitions(USE_MMAP)
-endif()
-
-if (USE_SENTENCEPIECE)
-    set(CMAKE_CXX_STANDARD 17)
-    add_compile_definitions(USE_SENTENCEPIECE)
-    set(FASTLLM_LINKED_LIBS ${FASTLLM_LINKED_LIBS} sentencepiece)
-endif()
-
 if (USE_CUDA)
     enable_language(CUDA)
     add_compile_definitions(USE_CUDA)
@@ -132,7 +102,6 @@ if (USE_NUMA)
     include_directories(include/devices/numa)
     set(FASTLLM_LINKED_LIBS ${FASTLLM_LINKED_LIBS} numa)
 endif()
-
 if (USE_NUMAS)
     add_compile_definitions(USE_NUMAS)
     set(FASTLLM_CXX_SOURCES ${FASTLLM_CXX_SOURCES} src/devices/numas/numasdevice.cpp src/devices/numas/numas.cpp)
