@@ -38,3 +38,6 @@ token
 /src/devices/multihip
 /test/mmlu
 *.o
+.gitignore
+.deploy.sh
+.recompile.sh
