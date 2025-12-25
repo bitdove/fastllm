@@ -15,6 +15,7 @@ if [ $? != 0 ]; then
     exit -1
 fi
 
+# 注意：这里进入的是 ./build-fastllm/tools 目录
 cd tools
 pip install .[all]
 #python3 setup.py sdist build
