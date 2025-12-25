@@ -140,23 +140,6 @@ if (USE_NUMAS)
     set(FASTLLM_LINKED_LIBS ${FASTLLM_LINKED_LIBS} numa)
 endif()
 
-if (PY_API)
-    if(POLICY CMP0148)
-        cmake_policy(SET CMP0148 NEW)
-    endif()
-    set(PYBIND third_party/pybind11)
-    add_subdirectory(${PYBIND})
-    add_compile_definitions(PY_API)
-    
-    set(Python3_ROOT_DIR "/usr/local/python3.10.6/bin/")
-    find_package(Python3 REQUIRED)
-
-    include_directories(third_party/pybind11/include)
-    file(GLOB FASTLLM_CXX_HEADERS include/**/*.h)
-    add_library(pyfastllm MODULE src/pybinding.cpp ${FASTLLM_CXX_SOURCES} ${FASTLLM_CXX_HEADERS} ${FASTLLM_CUDA_SOURCES} ${FASTLLM_TFACC_SOURCES} ${FASTLLM_TOPS_SOURCES})
-    target_link_libraries(pyfastllm PUBLIC pybind11::module ${FASTLLM_LINKED_LIBS})
-    pybind11_extension(pyfastllm)
-else()
 add_library(fastllm OBJECT
             ${FASTLLM_CXX_SOURCES}
             ${FASTLLM_CUDA_SOURCES}
@@ -184,4 +167,3 @@ add_custom_command(
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/libfastllm_tools.* ${CMAKE_BINARY_DIR}/tools/ftllm/.
         COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/libfastllm_tools.*
 )
-endif()
