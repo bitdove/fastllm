@@ -11,7 +11,7 @@
 #include "chatglm.h"
 // #include "moss.h"
 #include "llama.h"
-#include "moe.h"
+// #include "moe.h"
 // #include "qwen3.h"
 // #include "qwen3_moe.h"
 #include "qwen3_next.h"
@@ -226,8 +226,8 @@ namespace fastllm {
         //     model->model_type = "internlm";
         } else if (modelType == "llama") {
             model = (basellm*)(new LlamaModel());
-        } else if (modelType == "moe" || modelType == "qwen2_moe") {
-            model = (basellm*)(new MoeModel());
+        // } else if (modelType == "moe" || modelType == "qwen2_moe") {
+        //     model = (basellm*)(new MoeModel());
         // } else if (modelType == "qwen3_moe") {
         //     model = (basellm*)(new Qwen3MOEModel());
         } else if (modelType == "qwen3_next") {

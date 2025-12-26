@@ -64,7 +64,6 @@ set(FASTLLM_CXX_SOURCES src/fastllm.cpp src/device.cpp src/model.cpp src/executo
         src/models/llama.cpp 
         src/models/basellm.cpp
         src/models/bert.cpp 
-        src/models/moe.cpp 
         src/models/deepseekv2.cpp
         src/models/qwen3_next.cpp
         third_party/json11/json11.cpp
